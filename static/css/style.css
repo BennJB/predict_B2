@@ -230,13 +230,22 @@ a:focus {
   top: 0;
   left: 0;
 }
-p {
+
+.predict_title {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 40px;
+  font-weight: 400;
+  margin-top: 60px;
+  margin-bottom: 50px;
+}
+
+/* p {
   font-family: 'Open Sans', sans-serif;
   color: #9c9c9c;
   font-size: 14px;
   margin-bottom: 27px;
   font-weight: 400;
-}
+} */
 /* Heading Style */
 
 
