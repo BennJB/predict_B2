@@ -136,6 +136,78 @@
   font-size: 20px;
 }
 
+.card-box {
+  height: 110px;
+  width: 220px;
+  margin-left: 10px;
+  margin-right: 10px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid #e3e6f0;
+  border-radius: .35rem;
+}
+
+.card-box2 {
+  height: 110px;
+  width: 220px;
+  margin-right: 10px;
+  margin-left: 10px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid #e3e6f0;
+  border-radius: .35rem;
+}
+
+.card-box-title {
+  margin-left: 16px;
+  margin-top: 5px;
+  font-weight: bolder;
+  font-size: 15px;
+  color: black;
+  /* text-align: center; */
+}
+
+.process-img {
+  margin-left: 130px;
+  width: 50px;  
+}
+
+/* 정상일 때, 메세지 표시 */
+.process-text1 {
+  font-weight: bolder;
+  color: #0054FF;
+  font-size: 20px;
+  position: absolute;
+  top: 55px;
+  left: 57px;  
+}
+
+/* 경고일 때, 메세지 표시 */
+.process-text2 {
+  font-weight: bolder;
+  color: red;
+  font-size: 20px;
+  position: absolute;
+  top: 55px;
+  left: 57px;  
+}
+
+.card-main {
+  width: 700px;
+  margin: 0 auto;
+  border:3px solid #FFE08C; 
+  }
+
 body {
   font-family: 'Open Sans', sans-serif;
   color: rgba(255, 255, 255, 0.9);
@@ -233,10 +305,10 @@ a:focus {
 
 .predict_title {
   font-family: 'Open Sans', sans-serif;
-  font-size: 40px;
+  font-size: 35px;
   font-weight: 400;
-  margin-top: 60px;
-  margin-bottom: 50px;
+  margin-top: 35px;
+  margin-bottom: 70px;
 }
 
 /* p {
@@ -1076,8 +1148,7 @@ section.section {
 }
 .main-navbar-top .navbar-header .navbar-brand img {
   display: block;
-  height: 100%;
-  max-width: initial;
+  width: 120px;
 }
 .main-navbar-top .navbar-nav {
   margin: 0;

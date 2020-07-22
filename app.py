@@ -16,9 +16,14 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/data1')
-def sub_page():
-    return render_template('sub_page.html')
+@app.route('/result')
+def result():
+    return render_template('result.html')
+
+@app.route('/team')
+def team():
+    return render_template('team.html')    
+
 
 @app.route('/modeling_page')
 def modeling_page():
@@ -46,4 +51,4 @@ def modeling():
 if __name__ == '__main__':
     # app.debug = True
     # app.run()
-    
+    app.run(host='0.0.0.0', port=5000, debug=True)
