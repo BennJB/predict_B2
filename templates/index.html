@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>B B BIG</title>
-
+    <title>BBBIG</title>
+    <script>
+      function check(){
+        form1.submit()
+      }
+    </script>
      <!-- FAV AND TOUCH ICONS   -->
     <link rel="icon" href="static/images/favicon.ico">
     <link rel="apple-touch-icon" href="static/images/apple-touch-icon.png">
@@ -122,7 +126,7 @@
                                                     <div class="heading-outer top-bottom relative">
                                                         <div class="overflow p-t-40 p-l-40 p-r-40 p-b-40">
                                                             <div class="section-heading-outer">
-                                                                <h1 class="heading">불량률<span class="color">예측 & 경고</span>시스템</h1>
+                                                                <h1 class="heading">불량여부<span class="color">진단 & 경고</span>시스템</h1>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -161,7 +165,7 @@
                                         <div class="navbar-collapse-right" >
                                             <ul class="nav navbar-nav navbar-right">
                                                 <li>
-                                                    <a class="btn-nav btn-mask" href="#8">제품 문의<i class="icon icon-arrow-right"></i></a>
+                                                    <!-- <a class="btn-nav btn-mask" href="#8">제품 문의<i class="icon icon-arrow-right"></i></a> -->
                                                 </li>
                                             </ul>
                                         </div>
@@ -188,32 +192,32 @@
                       
                     <div class="inner-container services-section " id="services" style="background-size: cover; background-repeat: no-repeat; background-image: url(static/images/ai2.png);">
                         <div class="container">
-                            <p class="text-center predict_title">불량률 <span class="color">예측하기</span></p>
-                        </div>
+                            <p class="text-center predict_title">불량여부 <span class="color" style='font-weight: 800;'>진단</span></p>
                         <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 overflow" style="margin-left: 27%;">
                             <div class="row single-form-outer">
-                                <form>
+                              
+                                <form action='/modeling' method='POST' name=form1>
                                     <div class="col-xs-10">
                                         <div class="form-row" style="text-align: center;">
                                             <div class="form-group col-md-2">
                                               <label for="inputZip">산화공정</label>
-                                              <input type="text" placeholder='Type' class="form-control" id="inputZip">
+                                              <input type="text" name='type_dry' placeholder='type_dry' value='1' class="form-control" id="inputZip">
                                             </div>
                                             <div class="form-group col-md-2">
                                               <label for="inputZip">포토공정 1</label>
-                                              <input type="text" placeholder='resist_target	' class="form-control" id="inputZip">
+                                              <input type="text" name='N2_HMDS' placeholder='N2_HMDS' value='13.890' class="form-control" id="inputZip">
                                             </div>
                                             <div class="form-group col-md-2">
                                               <label for="inputZip">포토공정 2</label>
-                                              <input type="text" placeholder='UV_type' class="form-control" id="inputZip">
+                                              <input type="text" name='temp_HMDS' value='20' class="form-control" id="inputZip">
                                             </div>
                                             <div class="form-group col-md-2">
                                               <label for="inputZip">식각공정</label>
-                                              <input type="text" placeholder='Thin F4' class="form-control" id="inputZip">
+                                              <input type="text" name='Temp_Etching' value='71.01' class="form-control" id="inputZip">
                                             </div>
                                             <div class="form-group col-md-2">
                                               <label for="inputZip">이온공정</label>
-                                              <input type="text" placeholder='Flux60s' class="form-control" id="inputZip">
+                                              <input type="text" name='Flux840s' value='600000700000000000' class="form-control" id="inputZip">
                                             </div>
                                         </div>    
                                     </div>
@@ -221,19 +225,19 @@
                                     <div class="col-xs-10">
                                         <div class="form-row" style="text-align: center;">
                                             <div class="form-group col-md-2">
-                                              <input type="text" placeholder='Temp_OXid' class="form-control" id="inputZip">
+                                              <input type="text" name='Temp_OXid' value='1138.97' class="form-control" id="inputZip">
                                             </div>
                                             <div class="form-group col-md-2">
-                                              <input type="text" placeholder='N2_HMDS' class="form-control" id="inputZip">
+                                              <input type="text" name='pressure_HMDS' value='15.025' class="form-control" id="inputZip">
                                             </div>
                                             <div class="form-group col-md-2">
-                                              <input type="text" placeholder='Wavelength' class="form-control" id="inputZip">
+                                              <input type="text" name='Wavelength' value='365' class="form-control" id="inputZip">
                                             </div>
                                             <div class="form-group col-md-2">
-                                              <input type="text" placeholder='Thin F3' class="form-control" id="inputZip">
+                                              <input type="text" name='Thin_F4' value='251' class="form-control" id="inputZip">
                                             </div>
                                             <div class="form-group col-md-2">
-                                              <input type="text" placeholder='Flux90s' class="form-control" id="inputZip">
+                                              <input type="text" name='flux_rate1' value='4153684233333330' class="form-control" id="inputZip">
                                             </div>
                                         </div>    
                                     </div>
@@ -241,39 +245,19 @@
                                     <div class="col-xs-10">
                                         <div class="form-row" style="text-align: center;">
                                             <div class="form-group col-md-2">
-                                              <input type="text" placeholder='Vapor' class="form-control" id="inputZip">
+                                              <input type="text" name='Vapor_H2O' value='1' class="form-control" id="inputZip">
                                             </div>
                                             <div class="form-group col-md-2">
-                                              <input type="text" placeholder='pressure_HMDS' class="form-control" id="inputZip">
+                                              <input type="text" name='time_HMDS_bake' value='90.001' class="form-control" id="inputZip">
                                             </div>
                                             <div class="form-group col-md-2">
-                                              <input type="text" placeholder='Resolution' class="form-control" id="inputZip">
+                                              <input type="text" name='temp_softbake' value='90.894' class="form-control" id="inputZip">
                                             </div>
                                             <div class="form-group col-md-2">
-                                              <input type="text" placeholder='Thin F2' class="form-control" id="inputZip">
+                                              <input type="text" name='pr_thickness' value='1.935' class="form-control" id="inputZip">
                                             </div>
                                             <div class="form-group col-md-2">
-                                              <input type="text" placeholder='Flux160s' class="form-control" id="inputZip">
-                                            </div>
-                                        </div>    
-                                    </div>
-
-                                    <div class="col-xs-10">
-                                        <div class="form-row" style="text-align: center;">
-                                            <div class="form-group col-md-2">
-                                              <input type="text" placeholder='Ppm' class="form-control" id="inputZip">
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                              <input type="text" placeholder='temp_HMDS' class="form-control" id="inputZip">
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                              <input type="text" placeholder='Energy_Exposure' class="form-control" id="inputZip">
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                              <input type="text" placeholder='Thin F1' class="form-control" id="inputZip">
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                              <input type="text" placeholder='Flux480s' class="form-control" id="inputZip">
+                                              <input type="text" name='flux_rate2' value='3031717142857140' class="form-control" id="inputZip">
                                             </div>
                                         </div>    
                                     </div>
@@ -281,19 +265,39 @@
                                     <div class="col-xs-10">
                                         <div class="form-row" style="text-align: center;">
                                             <div class="form-group col-md-2">
-                                              <input type="text" placeholder='Pressure' class="form-control" id="inputZip">
+                                              <input type="text" name='ppm' value='32.8' class="form-control" id="inputZip">
                                             </div>
                                             <div class="form-group col-md-2">
-                                              <input type="text" placeholder='temp_HMDS_bake' class="form-control" id="inputZip">
+                                              <input type="text" name='temp_HMDS_bake' value='198.792' class="form-control" id="inputZip">
                                             </div>
                                             <div class="form-group col-md-2">
-                                              <input type="text" placeholder='Line_CD' class="form-control" id="inputZip">
+                                              <input type="text" name='Pressure' value='0.22' class="form-control" id="inputZip">
                                             </div>
                                             <div class="form-group col-md-2">
-                                              <input type="text" placeholder='Temp_Etching' class="form-control" id="inputZip">
+                                              <input type="text" name='flux_rate3' value='-145527500000000' class="form-control" id="inputZip">
                                             </div>
                                             <div class="form-group col-md-2">
-                                              <input type="text" placeholder='Flux840s' class="form-control" id="inputZip">
+                                              <input type="text" name='input_Energy' value='31574.41' class="form-control" id="inputZip">
+                                            </div>
+                                        </div>    
+                                    </div>
+
+                                    <div class="col-xs-10">
+                                        <div class="form-row" style="text-align: center;">
+                                            <div class="form-group col-md-2">
+                                              <input type="text" name='Oxid_time' value='62' class="form-control" id="inputZip">
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                              <input type="text" name='lense' value='0.706' class="form-control" id="inputZip">
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                              <input type="text" name='exp_time' value='40065.685' class="form-control" id="inputZip">
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                              <input type="text" name='Furance_Temp' value='885' class="form-control" id="inputZip">
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                              <input type="text" name='flux_rate4' value='832615000000000' class="form-control" id="inputZip">
                                             </div>
                                         </div>    
                                     </div>
@@ -301,19 +305,13 @@
                                     <div class="col-xs-10">
                                         <div class="form-row" style="text-align: center;">
                                             <div class="form-group col-md-2">
-                                              <input type="text" placeholder='Oxid_time' class="form-control" id="inputZip">
+                                              <input type="text" name='type_wet' value='0' class="form-control" id="inputZip">
                                             </div>
                                             <div class="form-group col-md-2">
-                                              <input type="text" placeholder='time_HMDS_bake' class="form-control" id="inputZip">
+                                              <input type="text" name='Vapor_O2' value='0' class="form-control" id="inputZip">
                                             </div>
                                             <div class="form-group col-md-2">
-                                              <input type="text" placeholder='temp_softbake' class="form-control" id="inputZip">
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                              <input type="text" placeholder='Source_Power' class="form-control" id="inputZip">
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                              <input type="text" placeholder='input_Energy' class="form-control" id="inputZip">
+                                              <input type="text" name='target_bool' value='0' class="form-control" id="inputZip">
                                             </div>
                                         </div>    
                                     </div>
@@ -321,77 +319,28 @@
                                     <div class="col-xs-10">
                                         <div class="form-row" style="text-align: center;">
                                             <div class="form-group col-md-2">
-                                              <input type="text" placeholder='Temp_OXid' class="form-control" id="inputZip">
+                                              <input type="text" name='Source_Power' value='49.338' class="form-control" id="inputZip">
                                             </div>
                                             <div class="form-group col-md-2">
-                                              <input type="text" placeholder='spin1' class="form-control" id="inputZip">
+                                              <input type="text" name='RTA_Temp' value='154' class="form-control" id="inputZip">
                                             </div>
                                             <div class="form-group col-md-2">
-                                              <input type="text" placeholder='time_softbake' class="form-control" id="inputZip">
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                              <input type="text" placeholder='Selectivity' class="form-control" id="inputZip">
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                              <input type="text" placeholder='Temp_implantation' class="form-control" id="inputZip">
+                                              <input type="text" name='Temp_implantation' value='102.847' class="form-control" id="inputZip">
                                             </div>
                                         </div>    
                                     </div>
-
-                                    <div class="col-xs-10">
-                                        <div class="form-row" style="text-align: center;">
-                                            <div class="form-group col-md-2">
-                                            </div>
-                                            <div class="form-group col-md-2">    
-                                              <input type="text" placeholder='spin2' class="form-control" id="inputZip">
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                              <input type="text" placeholder='Furance_Temp' class="form-control" id="inputZip">
-                                            </div>
-                                        </div>    
-                                    </div>
-
-                                    <div class="col-xs-10">
-                                        <div class="form-row" style="text-align: center;">
-                                            <div class="form-group col-md-2">
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                              <input type="text" placeholder='spin3' class="form-control" id="inputZip">
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                              <input type="text" placeholder='RTA_Temp' class="form-control" id="inputZip">
-                                            </div>
-                                        </div>    
-                                    </div>
-
-                                    <div class="col-xs-10">
-                                        <div class="form-row" style="text-align: center;">
-                                            <div class="form-group col-md-2">
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                              <input type="text" placeholder='photoresist_bake' class="form-control" id="inputZip">
-                                            </div>
-                                        </div>       
-                                    </div>
-                                    <div class="col-xs-8">
-                                      <button type="button" style='width: 100%; height: 45px; 
+                                    <div class="col-xs-8" style='width: 70%;'>
+                                      <input type="button" style='width: 100%; height: 45px; 
                                       border-top-left-radius: 5px; border-bottom-left-radius: 5px;
                                       border-top-right-radius: 5px; border-bottom-right-radius: 5px;'
-                                      class="btn btn-warning btn-primary btn-lg">결과 예측</button>
+                                      class="btn btn-warning btn-primary btn-lg" value='결과 예측' onclick='check()'>
                                     </div>
-                                </form>
 
+                                </form>
+                        
                             </div> <!-- /#testimonials-1 -->
                         </div> <!-- End: .col-xs-12 -->
-                        </div>      
+                      </div>      
                     </div>     
                 </div>
  

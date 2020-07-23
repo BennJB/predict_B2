@@ -24,28 +24,47 @@ def result():
 def team():
     return render_template('team.html')    
 
-
-@app.route('/modeling_page')
-def modeling_page():
-    return render_template('modeling_page.html')
-
  
 @app.route('/modeling', methods=['POST'])
 def modeling():
-    # name = request.form['name']
-    age = request.form['age']
-    weight = request.form['weight']
-    runtime = request.form['runtime']
-    maxpulse = request.form['maxpulse']
-    runpulse = request.form['runpulse']
-    rstpulse = request.form['rstpulse']
+    Temp_OXid = request.form['Temp_OXid']
+    ppm = request.form['ppm']
+    Pressure = request.form['Pressure']
+    Oxid_time = request.form['Oxid_time']
+    N2_HMDS = request.form['N2_HMDS']
+    pressure_HMDS = request.form['pressure_HMDS']
+    temp_HMDS = request.form['temp_HMDS']
+    Temp_Etching = request.form['Temp_Etching']
+    temp_HMDS_bake = request.form['temp_HMDS_bake']
+    time_HMDS_bake= request.form['time_HMDS_bake']
+    temp_softbake = request.form['temp_softbake']
+    pr_thickness = request.form['pr_thickness']
+    Wavelength = request.form['Wavelength']
+    exp_time = request.form['exp_time']
+    lense = request.form['lense']
+    Thin_F4 = request.form['Thin_F4']
+    Source_Power = request.form['Source_Power']
+    Flux840s = request.form['Flux840s']
+    input_Energy = request.form['input_Energy']
+    Temp_implantation = request.form['Temp_implantation']
+    Furance_Temp = request.form['Furance_Temp']
+    RTA_Temp = request.form['RTA_Temp']
+    flux_rate1 = request.form['flux_rate1']
+    flux_rate2 = request.form['flux_rate2']
+    flux_rate3 = request.form['flux_rate3']
+    flux_rate4 = request.form['flux_rate4']
+    target_bool = request.form['target_bool']
+    type_dry = request.form['type_dry']
+    type_wet = request.form['type_wet']
+    Vapor_H2O = request.form['Vapor_H2O']
+    Vapor_O2= request.form['Vapor_O2']
     
-    data1 = [[age,weight,runtime,maxpulse,runpulse,rstpulse]]
+    data1 = [[Temp_OXid,ppm,Pressure,Oxid_time,N2_HMDS,pressure_HMDS,temp_HMDS,temp_HMDS_bake,time_HMDS_bake,temp_softbake,	pr_thickness,Wavelength,exp_time,lense,Thin_F4,Temp_Etching,Source_Power,Flux840s,input_Energy,Temp_implantation,Furance_Temp,RTA_Temp,flux_rate1,flux_rate2,flux_rate3,flux_rate4,target_bool,type_dry,type_wet,Vapor_H2O,Vapor_O2]]
     estimator = dbMgr.modeling_RF()
     df3 = pd.DataFrame(data=data1)
-    predict = estimator.predict(df3)
+    predict = estimator
     
-    return render_template('modeling_page.html', predict=predict) 
+    return render_template('result.html', predict=predict) 
 
 # finished code
 if __name__ == '__main__':

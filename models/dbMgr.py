@@ -1,30 +1,27 @@
 import pandas as pd
-from sklearn.model_selection import GridSearchCV
-from sklearn.preprocessing import RobustScaler
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.pipeline import Pipeline
+import numpy as np
+from sklearn.model_selection import train_test_split
+from xgboost.sklearn import XGBClassifier
  
 def modeling_RF():
     estimator = None
     try:
-        df1 = pd.read_csv('model_data.csv', encoding = 'cp949')
-        print(df1.shape)
+        df1 = pd.read_csv('last_total.csv', encoding = 'cp949')
         
-        df2 = df1.dropna()
-        
-        X = df2[["AGE","WEIGHT","RUNTIME","RUNPULSE","RSTPULSE","MAXPULSE"]]
-        Y = df2["OXY"]
-    
-        model = Pipeline([('scaler',RobustScaler()),('model',RandomForestRegressor())])
-        param = {'model__max_depth':[2,3,4,5]}
-  
-        model_grid = GridSearchCV(model, param_grid = param, cv = 3)
-        model_grid.fit(X,Y)
-        estimator = model_grid.best_estimator_
-        
+        df_dummy = pd.get_dummies(df1)
+        train, test = train_test_split(df_dummy, test_size = 0.2, random_state=1234)
+        train_x = train.drop('target_bool', axis=1)
+        train_y = train['target_bool']
+        test_x = test.drop('target_bool', axis=1)
+        test_y = test['target_bool']
+
+        xgb = XGBClassifier(random_state=1234, learning_rate= 0.6000000000000001, max_depth= 9, n_estimators= 200)
+        xgb.fit(train_x,train_y)
+        abc = xgb.score(train_x,train_y)
+
     except Exception as e:
         print(e)
     finally:
         pass
     
-    return estimator
+    return abc

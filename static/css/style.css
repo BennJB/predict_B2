@@ -186,27 +186,37 @@
 .process-text1 {
   font-weight: bolder;
   color: #0054FF;
-  font-size: 20px;
+  font-size: 25px;
   position: absolute;
   top: 55px;
-  left: 57px;  
+  left: 48px;  
 }
 
 /* 경고일 때, 메세지 표시 */
 .process-text2 {
   font-weight: bolder;
   color: red;
-  font-size: 20px;
+  font-size: 25px;
   position: absolute;
   top: 55px;
-  left: 57px;  
+  left: 48px;  
+}
+
+/* 분석 보고서 인덱스 타이틀 */
+.anal-index {
+  margin-bottom: 40px;
+  margin-top: 60px;
+  font-size: 25px;
 }
 
 .card-main {
+  /* margin-top: 20px; */
   width: 700px;
   margin: 0 auto;
-  border:3px solid #FFE08C; 
+  border:1px solid #454545; 
   }
+
+
 
 body {
   font-family: 'Open Sans', sans-serif;
@@ -304,11 +314,12 @@ a:focus {
 }
 
 .predict_title {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 35px;
+  font-weight: 800;
+  font-family: 'Merriweather', serif;
+  font-size: 40px;
   font-weight: 400;
   margin-top: 35px;
-  margin-bottom: 70px;
+  margin-bottom: 50px;
 }
 
 /* p {
@@ -378,7 +389,7 @@ h6 {
   font-weight: 400;
 }
 .sub-heading {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Merriweather', serif;
   font-size: 14px;
   line-height: 40px;
   font-weight: 600;

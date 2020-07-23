@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="overflow: auto;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>B B BIG</title>
+    <title>BBBIG</title>
 
      <!-- FAV AND TOUCH ICONS   -->
     <link rel="icon" href="static/images/favicon.ico">
@@ -19,6 +19,8 @@
       <!-- font-family: 'Open Sans', sans-serif; -->
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+
     <!-- BOOTSTRAP CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
 
@@ -48,9 +50,9 @@
 
             </div>
             <nav class="navbar navbar-light bg-light" style="position: absolute; left: 75%;">
-                <a href="#"></a><span class="navbar-brand mb-0 h1">Contact us</span></a>
-                <a href="#2"></a><span class="navbar-brand mb-0 h1">Predict</span></a   >
-                <a href="/"><span class="navbar-brand mb-0 h1">Home</span></a>
+                <a href="#"></a><span class="navbar-brand mb-0 h1"></span></a>
+                <a href="#2"></a><span class="navbar-brand mb-0 h1"></span></a>
+                <a href="/"><span class="navbar-brand mb-0 h1" style="margin-left: 160px;">Home</span></a>
             </nav>
          
         </div>
@@ -70,17 +72,18 @@
                 <!--Start: 2nd Page Slider Section
                     - SERVICES PAGE
                 ====================================-->
-                <div class="section section-item combine-section hide-overlay overflow semi-dark-background" data-heading="">
+                <div class="section section-item combine-section hide-overlay semi-dark-background" data-heading="">
                       
-                    <div class="inner-container services-section " id="services">
+                    <div class="inner-container services-section" id="services" style='background-image: url(static/images/bigdata.png);'>
                         <div class="container">
                             <p class="text-center predict_title" style='margin-top: 10px;'>분석 결과 보고서</p>
-                            
-                            <div class="card text-center card-main">
+                        </div>
+                    
+                        <div class="container" style='border: 1px solid #454545;'>
+                            <div class="card text-center card-main" style='margin-top: 20px;'>
                                 <div class="card-body">
-                                  <h5 class="card-title">불량 비율 예측 결과</h5>
-                                  <p class="card-text" style='font-size: 20px;'>wafer 불량 비율은 <span style='font-size: 35px; color:#FFE08C;'>15% </span> 불량 칩수는 <span style='font-size: 35px; color:#FFE08C;'>75개</span></p>
-                                  <p><span style='font-size: 25px;'>정상</span>입니다.</p>
+                                  <h5 class="card-title">불량여부 예측 결과</h5>
+                                  <p class="card-text" style='font-size: 20px;'>모델 정확도 <span style='font-size: 30px; color:#FFE08C;'>93.005%</span>로, 해당 wafer는 <span style='font-size: 30px; color:red;'>불량</span>으로 예측 되었습니다.</p>
                                 </div>
                                 <div class="card-footer text-muted">
                                   <p></p>
@@ -88,18 +91,18 @@
                               </div>
 
                             <div class="row" style="margin-left: 86px;">
-                                 <div class="card-box col-sm-3" style="margin-top:30px; border-left: 4px solid #F15F5F!important;">
+                                <div class="card-box col-sm-3" style="margin-top:30px; border-left: 4px solid #F15F5F!important;">
                                     <div class="card-body">
                                         <p class="card-box-title">Oxidation 공정</p>
                                         <img class="process-img" src="static/images/oxi.png">
-                                        <p class='process-text1'>정상</p>
+                                        <p class='process-text2'>경고</p>
                                     </div>
                                 </div>
                                 <div class="card-box col-sm-3" style="margin-top:30px; border-left: 4px solid #FFBB00!important;">
                                     <div class="card-body">
                                         <p class="card-box-title">Photo 공정</p>
                                         <img class="process-img" src="static/images/spotlight.png">
-                                        <p class='process-text2'>경고</p>
+                                        <p class='process-text1'>경고</p>
                                     </div>
                                 </div>
                                 <div class="card-box col-sm-3" style="margin-top:30px; border-left: 4px solid #4e73df!important;">
@@ -115,9 +118,1315 @@
                                         <img class="process-img" src="static/images/ion.png">
                                         <p class='process-text1'>정상</p>
                                     </div>
-                                  </div>
-                              </div>
+                                </div>
+                            </div>
+
+                            <p class="anal-index">1) 공정별 최적 Parameter</p>
+                            <p style="font-size: 20px; text-align: center; color: #FFE08C; margin-bottom: 0px;">Oxidation 공정</p>
+                            <p style="font-size: 15px; text-align: center;">목표변수 Thickness가 7000.9일 때 (Vapor = o2, Type = Dry)</p>
+                            <div style="width: 910px; margin: 0 auto; border: 1px solid #454545;">
+                                <canvas id="canvas1" width="300px" height="200px" style="display: inline-block ;"></canvas>
+                                <canvas id="canvas2" width="300px" height="200px" style="display: inline-block;"></canvas>
+                                <canvas id="canvas3" width="300px" height="200px" style="display: inline-block;"></canvas>
+                            </div>
+
+                            <p style="font-size: 20px; text-align: center; color: #FFE08C; margin-top: 20px; margin-bottom: 0px;">Photo 공정</p>
+                            <p style="font-size: 15px; text-align: center;">목표변수 Line_CD가 40.32일 때</p>
+                            <div style="width: 910px; margin: 0 auto; border: 1px solid #454545;">
+                                <canvas id="canvas4" width="300px" height="200px" style="display: inline-block ;"></canvas>
+                                <canvas id="canvas5" width="300px" height="200px" style="display: inline-block;"></canvas>
+                                <canvas id="canvas6" width="300px" height="200px" style="display: inline-block;"></canvas>
+                              </div> 
+                              
+                            <p style="font-size: 20px; text-align: center; color: #FFE08C; margin-top: 20px; margin-bottom: 0px;">Etching 공정</p>
+                            <p style="font-size: 15px; text-align: center;">목표변수 Etching_rate4가 149.77일 때</p>
+                            <div style="width: 910px; margin: 0 auto; border: 1px solid #454545;">
+                                <canvas id="canvas7" width="300px" height="200px" style="display: inline-block;"></canvas>
+                                <canvas id="canvas8" width="300px" height="200px" style="display: inline-block;"></canvas>
+                                <canvas id="canvas9" width="300px" height="200px" style="display: inline-block;"></canvas>
+                                <canvas id="canvas10" width="300px" height="200px" style="display: inline-block;"></canvas>
+                                <canvas id="canvas11" width="300px" height="200px" style="display: inline-block;"></canvas>
+                              </div> 
+                              
+                              <p style="font-size: 20px; text-align: center; color: #FFE08C; margin-top: 20px; margin-bottom: 0px;">Ion_implantation 공정</p>
+                              <p style="font-size: 15px; text-align: center;">목표변수 Flux840s가 6e+17일 때</p>
+                              <div style="width: 910px; margin: 0 auto; border: 1px solid #454545;">
+                                  <canvas id="canvas12" width="300px" height="200px" style="display: inline-block;"></canvas>
+                                  <canvas id="canvas13" width="300px" height="200px" style="display: inline-block;"></canvas>
+                                  <canvas id="canvas14" width="300px" height="200px" style="display: inline-block;"></canvas>
+                                </div>    
+
+                              <script>
+                                new Chart(document.getElementById("canvas1"), {
+                                    type: 'line',
+                                    data: {
+                                        // x축 라벨
+                                        labels: ['1', '2'],
+                                        datasets: [{
+                                            label: '최대 최적값',
+                                            data: [0.213,0.213,0.213,0.213,0.213],
+                                            borderColor: "#4374D9",
+                                            backgroundColor: "#4374D9",
+                                            pointRadius : 0,
+                                            fill: false,
+                                            lineTension: 0}, 
+                                            
+                                            {
+                                        label: '최소 최적값',
+                                            fontColor:'white',
+                                            fontSize : 12,
+                                            data: [0.2,0.2,0.2,0.2,0.2],
+                                            fill: false,         // 채우기 없음
+                                            lineTension : 0,  // 0이면 꺾은선 그래프, 숫자가 높을수록 둥글해짐
+                                            pointRadius : 0,    // 각 지점에 포인트 주지 않음
+                                            borderColor: "#B2CCFF",
+                                            backgroundColor: "#B2CCFF",
+                                            lineTension: 0},
+                                            {
+                                        
+                                        label: '투입 값',
+                                            fontColor:'white',
+                                            fontSize : 12,
+                                            data: [0.22,0.22,0.22,0.22,0.22],
+                                            fill: false,         // 채우기 없음
+                                            lineTension : 0,  // 0이면 꺾은선 그래프, 숫자가 높을수록 둥글해짐
+                                            pointRadius : 0,    // 각 지점에 포인트 주지 않음
+                                            borderColor: "red",
+                                            backgroundColor: "red",
+                                            lineTension: 0}    
+                                        ]
+                                    },
+
+                                    options: {
+                                        responsive: false,
+                                        // 표 위에 라벨명 스타일
+                                        legend: {
+			                            	labels: {
+			                            		fontColor: "white",
+			                            		fontSize: 12
+			                            	}
+			                            },
+                                        title: {
+                                            display: true,
+                                            text: 'Pressure',
+                                            fontColor:'white',
+                                            fontSize : 15
+                                        },
+                                        tooltips: {
+                                            mode: 'index',
+                                            intersect: false,
+                                        },
+                                        hover: {
+                                            mode: 'nearest',
+                                            intersect: true
+                                        },
+                                        scales: {
+                                            xAxes: [{
+                                                display: true,
+                                                ticks: {
+                                                min: 0,
+						                        max: 1,
+                                                // x축 index 색깔
+                                                fontColor:'#171717',
+                                                fontSize : 12
+                                                },
+                                                scaleLabel: {
+                                                    display: true,
+                                                    labelString: 'x축'
+                                                }
+                                            }],
+                                            yAxes: [{
+                                                display: true,
+                                                ticks: {
+                                                min: 0.195,
+						                        max: 0.225,   
+                                                suggestedMin: 0,
+                                                fontColor:'white',
+                                                fontSize : 12
+                                                },
+                                                scaleLabel: {
+                                                    display: true,
+                                                    labelString: 'Parameter값',
+                                                    fontColor:'white',
+                                                    fontSize : 12
+                                                }
+                                            }]
+                                        }
+                                    }
+                                });
+                                
+                                </script>  
+
+                                <script>
+                                new Chart(document.getElementById("canvas2"), {
+                                    type: 'line',
+                                    data: {
+                                        // x축 라벨
+                                        labels: ['1', '2'],
+                                        datasets: [{
+                                            label: '최대 최적값',
+                                            data: [1078.9, 1078.9, 1078.9, 1078.9, 1078.9],
+                                            borderColor: "#4374D9",
+                                            backgroundColor: "#4374D9",
+                                            pointRadius : 0,
+                                            fill: false,
+                                            lineTension: 0}, 
+                                            
+                                            {
+                                        label: '최소 최적값',
+                                            fontColor:'white',
+                                            fontSize : 12,
+                                            data: [1065.9, 1065.9, 1065.9, 1065.9, 1065.9],
+                                            fill: false,         // 채우기 없음
+                                            lineTension : 0,  // 0이면 꺾은선 그래프, 숫자가 높을수록 둥글해짐
+                                            pointRadius : 0,    // 각 지점에 포인트 주지 않음
+                                            borderColor: "#B2CCFF",
+                                            backgroundColor: "#B2CCFF",
+                                            lineTension: 0}
+                                        ]
+                                    },
+
+                                    options: {
+                                        responsive: false,
+                                        // 표 위에 라벨명 스타일
+                                        legend: {
+			                            	labels: {
+			                            		fontColor: "white",
+			                            		fontSize: 12
+			                            	}
+			                            },
+                                        title: {
+                                            display: true,
+                                            text: 'Temp_Oxid',
+                                            fontColor:'white',
+                                            fontSize : 15
+                                        },
+                                        tooltips: {
+                                            mode: 'index',
+                                            intersect: false,
+                                        },
+                                        hover: {
+                                            mode: 'nearest',
+                                            intersect: true
+                                        },
+                                        scales: {
+                                            xAxes: [{
+                                                display: true,
+                                                ticks: {
+                                                min: 0,
+						                        max: 1,
+                                                // x축 index 색깔
+                                                fontColor:'#171717',
+                                                fontSize : 12
+                                                },
+                                                scaleLabel: {
+                                                    display: true,
+                                                    labelString: 'x축'
+                                                }
+                                            }],
+                                            yAxes: [{
+                                                display: true,
+                                                ticks: {
+                                                min: 1062,
+						                        max: 1084,   
+                                                suggestedMin: 0,
+                                                fontColor:'white',
+                                                fontSize : 12
+                                                },
+                                                scaleLabel: {
+                                                    display: true,
+                                                    labelString: 'Parameter값',
+                                                    fontColor:'white',
+                                                    fontSize : 12
+                                                }
+                                            }]
+                                        }
+                                    }
+                                });
+                                
+                                </script>
+
+<script>
+    new Chart(document.getElementById("canvas3"), {
+        type: 'line',
+        data: {
+            // x축 라벨
+            labels: ['1', '2'],
+            datasets: [{
+                label: '최대 최적값',
+                data: [35.4, 35.4, 35.4, 35.4, 35.4],
+                borderColor: "#4374D9",
+                backgroundColor: "#4374D9",
+                pointRadius : 0,
+                fill: false,
+                lineTension: 0}, 
+                
+                {
+            label: '최소 최적값',
+                fontColor:'white',
+                fontSize : 12,
+                data: [33.1, 33.1, 33.1, 33.1, 33.1],
+                fill: false,         // 채우기 없음
+                lineTension : 0,  // 0이면 꺾은선 그래프, 숫자가 높을수록 둥글해짐
+                pointRadius : 0,    // 각 지점에 포인트 주지 않음
+                borderColor: "#B2CCFF",
+                backgroundColor: "#B2CCFF",
+                lineTension: 0}
+            ]
+        },
+
+        options: {
+            responsive: false,
+            // 표 위에 라벨명 스타일
+            legend: {
+                labels: {
+                    fontColor: "white",
+                    fontSize: 12
+                }
+            },
+            title: {
+                display: true,
+                text: 'Ppm',
+                fontColor:'white',
+                fontSize : 15
+            },
+            tooltips: {
+                mode: 'index',
+                intersect: false,
+            },
+            hover: {
+                mode: 'nearest',
+                intersect: true
+            },
+            scales: {
+                xAxes: [{
+                    display: true,
+                    ticks: {
+                    min: 0,
+                    max: 1,
+                    // x축 index 색깔
+                    fontColor:'#171717',
+                    fontSize : 12
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'x축'
+                    }
+                }],
+                yAxes: [{
+                    display: true,
+                    ticks: {
+                    min: 31,
+                    max: 37,   
+                    suggestedMin: 0,
+                    fontColor:'white',
+                    fontSize : 12
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Parameter값',
+                        fontColor:'white',
+                        fontSize : 12
+                    }
+                }]
+            }
+        }
+    });
+    </script>
+    <!-- Oxidation END -->
+
+    <!-- Photo Start -->
+    <script>
+        new Chart(document.getElementById("canvas4"), {
+            type: 'line',
+            data: {
+                // x축 라벨
+                labels: ['1', '2'],
+                datasets: [{
+                    label: '최적값',
+                    data: [365, 365, 365, 365, 365],
+                    borderColor: "#4374D9",
+                    backgroundColor: "#4374D9",
+                    pointRadius : 0,
+                    fill: false,
+                    lineTension: 0}, 
+                    
+                //     {
+                // label: '최소 최적값',
+                //     fontColor:'white',
+                //     fontSize : 12,
+                //     data: [33.1, 33.1, 33.1, 33.1, 33.1],
+                //     fill: false,         // 채우기 없음
+                //     lineTension : 0,  // 0이면 꺾은선 그래프, 숫자가 높을수록 둥글해짐
+                //     pointRadius : 0,    // 각 지점에 포인트 주지 않음
+                //     borderColor: "#B2CCFF",
+                //     backgroundColor: "#B2CCFF",
+                //     lineTension: 0}
+                ]
+            },
+    
+            options: {
+                responsive: false,
+                // 표 위에 라벨명 스타일
+                legend: {
+                    labels: {
+                        fontColor: "white",
+                        fontSize: 12
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Wavelength',
+                    fontColor:'white',
+                    fontSize : 15
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        ticks: {
+                        min: 0,
+                        max: 1,
+                        // x축 index 색깔
+                        fontColor:'#171717',
+                        fontSize : 12
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'x축'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        ticks: {
+                        min: 362,
+                        max: 368,   
+                        suggestedMin: 0,
+                        fontColor:'white',
+                        fontSize : 12
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Parameter값',
+                            fontColor:'white',
+                            fontSize : 12
+                        }
+                    }]
+                }
+            }
+        });
+        </script>
+
+<script>
+    new Chart(document.getElementById("canvas5"), {
+        type: 'line',
+        data: {
+            // x축 라벨
+            labels: ['1', '2'],
+            datasets: [{
+                label: '최대 최적값',
+                data: [40322,40322,40322,40322,40322],
+                borderColor: "#4374D9",
+                backgroundColor: "#4374D9",
+                pointRadius : 0,
+                fill: false,
+                lineTension: 0}, 
+                
+                {
+            label: '최소 최적값',
+                fontColor:'white',
+                fontSize : 12,
+                data: [40318,40318,40318,40318,40318],
+                fill: false,         // 채우기 없음
+                lineTension : 0,  // 0이면 꺾은선 그래프, 숫자가 높을수록 둥글해짐
+                pointRadius : 0,    // 각 지점에 포인트 주지 않음
+                borderColor: "#B2CCFF",
+                backgroundColor: "#B2CCFF",
+                lineTension: 0}
+            ]
+        },
+
+        options: {
+            responsive: false,
+            // 표 위에 라벨명 스타일
+            legend: {
+                labels: {
+                    fontColor: "white",
+                    fontSize: 12
+                }
+            },
+            title: {
+                display: true,
+                text: 'Exp_time',
+                fontColor:'white',
+                fontSize : 15
+            },
+            tooltips: {
+                mode: 'index',
+                intersect: false,
+            },
+            hover: {
+                mode: 'nearest',
+                intersect: true
+            },
+            scales: {
+                xAxes: [{
+                    display: true,
+                    ticks: {
+                    min: 0,
+                    max: 1,
+                    // x축 index 색깔
+                    fontColor:'#171717',
+                    fontSize : 12
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'x축'
+                    }
+                }],
+                yAxes: [{
+                    display: true,
+                    ticks: {
+                    min: 40315,
+                    max: 40325,   
+                    suggestedMin: 0,
+                    fontColor:'white',
+                    fontSize : 12
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Parameter값',
+                        fontColor:'white',
+                        fontSize : 12
+                    }
+                }]
+            }
+        }
+    });
+    </script>
+    <script>
+        new Chart(document.getElementById("canvas6"), {
+            type: 'line',
+            data: {
+                // x축 라벨
+                labels: ['1', '2'],
+                datasets: [{
+                    label: '최대 최적값',
+                    data: [0.74,0.74,0.74,0.74,0.74],
+                    borderColor: "#4374D9",
+                    backgroundColor: "#4374D9",
+                    pointRadius : 0,
+                    fill: false,
+                    lineTension: 0}, 
+                    
+                    {
+                label: '최소 최적값',
+                    fontColor:'white',
+                    fontSize : 12,
+                    data: [0.68,0.68,0.68,0.68,0.68],
+                    fill: false,         // 채우기 없음
+                    lineTension : 0,  // 0이면 꺾은선 그래프, 숫자가 높을수록 둥글해짐
+                    pointRadius : 0,    // 각 지점에 포인트 주지 않음
+                    borderColor: "#B2CCFF",
+                    backgroundColor: "#B2CCFF",
+                    lineTension: 0}
+                ]
+            },
+    
+            options: {
+                responsive: false,
+                // 표 위에 라벨명 스타일
+                legend: {
+                    labels: {
+                        fontColor: "white",
+                        fontSize: 12
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Lense',
+                    fontColor:'white',
+                    fontSize : 15
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        ticks: {
+                        min: 0,
+                        max: 1,
+                        // x축 index 색깔
+                        fontColor:'#171717',
+                        fontSize : 12
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'x축'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        ticks: {
+                        min: 0.62,
+                        max: 0.78,   
+                        suggestedMin: 0,
+                        fontColor:'white',
+                        fontSize : 12
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Parameter값',
+                            fontColor:'white',
+                            fontSize : 12
+                        }
+                    }]
+                }
+            }
+        });
+        </script>
+    <!-- Photo END -->
+
+    <!-- Etching Start -->
+    <script>
+        new Chart(document.getElementById("canvas7"), {
+            type: 'line',
+            data: {
+                // x축 라벨
+                labels: ['1', '2'],
+                datasets: [{
+                    label: '최대 최적값',
+                    data: [71.48,71.48,71.48,71.48,71.48],
+                    borderColor: "#4374D9",
+                    backgroundColor: "#4374D9",
+                    pointRadius : 0,
+                    fill: false,
+                    lineTension: 0}, 
+                    
+                    {
+                label: '최소 최적값',
+                    fontColor:'white',
+                    fontSize : 12,
+                    data: [71.28,71.28,71.28,71.28,71.28],
+                    fill: false,         // 채우기 없음
+                    lineTension : 0,  // 0이면 꺾은선 그래프, 숫자가 높을수록 둥글해짐
+                    pointRadius : 0,    // 각 지점에 포인트 주지 않음
+                    borderColor: "#B2CCFF",
+                    backgroundColor: "#B2CCFF",
+                    lineTension: 0},
+                    {
+                                        
+                label: '투입 값',
+                    fontColor:'white',
+                    fontSize : 12,
+                    data: [71.01,71.01,71.01,71.01,71.01],
+                    fill: false,         // 채우기 없음
+                    lineTension : 0,  // 0이면 꺾은선 그래프, 숫자가 높을수록 둥글해짐
+                    pointRadius : 0,    // 각 지점에 포인트 주지 않음
+                    borderColor: "red",
+                    backgroundColor: "red",
+                    lineTension: 0}                       
+                ]
+            },
+    
+            options: {
+                responsive: false,
+                // 표 위에 라벨명 스타일
+                legend: {
+                    labels: {
+                        fontColor: "white",
+                        fontSize: 12
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Temp_Etching',
+                    fontColor:'white',
+                    fontSize : 15
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        ticks: {
+                        min: 0,
+                        max: 1,
+                        // x축 index 색깔
+                        fontColor:'#171717',
+                        fontSize : 12
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'x축'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        ticks: {
+                        min: 71.00,
+                        max: 71.66,   
+                        suggestedMin: 0,
+                        fontColor:'white',
+                        fontSize : 12
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Parameter값',
+                            fontColor:'white',
+                            fontSize : 12
+                        }
+                    }]
+                }
+            }
+        });
+        </script>
+        <script>
+            new Chart(document.getElementById("canvas8"), {
+                type: 'line',
+                data: {
+                    // x축 라벨
+                    labels: ['1', '2'],
+                    datasets: [{
+                        label: '최대 최적값',
+                        data: [49.373,49.373,49.373,49.373,49.373],
+                        borderColor: "#4374D9",
+                        backgroundColor: "#4374D9",
+                        pointRadius : 0,
+                        fill: false,
+                        lineTension: 0}, 
+                        
+                        {
+                    label: '최소 최적값',
+                        fontColor:'white',
+                        fontSize : 12,
+                        data: [49.351,49.351,49.351,49.351,49.351],
+                        fill: false,         // 채우기 없음
+                        lineTension : 0,  // 0이면 꺾은선 그래프, 숫자가 높을수록 둥글해짐
+                        pointRadius : 0,    // 각 지점에 포인트 주지 않음
+                        borderColor: "#B2CCFF",
+                        backgroundColor: "#B2CCFF",
+                        lineTension: 0},
+                        {
+                                        
+                    label: '투입 값',
+                        fontColor:'white',
+                        fontSize : 12,
+                        data: [49.338,49.338,49.338,49.338,49.338],
+                        fill: false,         // 채우기 없음
+                        lineTension : 0,  // 0이면 꺾은선 그래프, 숫자가 높을수록 둥글해짐
+                        pointRadius : 0,    // 각 지점에 포인트 주지 않음
+                        borderColor: "red",
+                        backgroundColor: "red",
+                        lineTension: 0}        
+                    ]
+                },
+        
+                options: {
+                    responsive: false,
+                    // 표 위에 라벨명 스타일
+                    legend: {
+                        labels: {
+                            fontColor: "white",
+                            fontSize: 12
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Source_Power',
+                        fontColor:'white',
+                        fontSize : 15
+                    },
+                    tooltips: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true
+                    },
+                    scales: {
+                        xAxes: [{
+                            display: true,
+                            ticks: {
+                            min: 0,
+                            max: 1,
+                            // x축 index 색깔
+                            fontColor:'#171717',
+                            fontSize : 12
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'x축'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            ticks: {
+                            min: 49.331,
+                            max: 49.393,   
+                            suggestedMin: 0,
+                            fontColor:'white',
+                            fontSize : 12
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Parameter값',
+                                fontColor:'white',
+                                fontSize : 12
+                            }
+                        }]
+                    }
+                }
+            });
+            </script>
+            <script>
+                new Chart(document.getElementById("canvas9"), {
+                    type: 'line',
+                    data: {
+                        // x축 라벨
+                        labels: ['1', '2'],
+                        datasets: [{
+                            label: '최대 최적값',
+                            data: [138.6,138.6,138.6,138.6,138.6],
+                            borderColor: "#4374D9",
+                            backgroundColor: "#4374D9",
+                            pointRadius : 0,
+                            fill: false,
+                            lineTension: 0}, 
+                            
+                            {
+                        label: '최소 최적값',
+                            fontColor:'white',
+                            fontSize : 12,
+                            data: [136.8,136.8,136.8,136.8,136.8],
+                            fill: false,         // 채우기 없음
+                            lineTension : 0,  // 0이면 꺾은선 그래프, 숫자가 높을수록 둥글해짐
+                            pointRadius : 0,    // 각 지점에 포인트 주지 않음
+                            borderColor: "#B2CCFF",
+                            backgroundColor: "#B2CCFF",
+                            lineTension: 0}
+                        ]
+                    },
+            
+                    options: {
+                        responsive: false,
+                        // 표 위에 라벨명 스타일
+                        legend: {
+                            labels: {
+                                fontColor: "white",
+                                fontSize: 12
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Etching_rate1',
+                            fontColor:'white',
+                            fontSize : 15
+                        },
+                        tooltips: {
+                            mode: 'index',
+                            intersect: false,
+                        },
+                        hover: {
+                            mode: 'nearest',
+                            intersect: true
+                        },
+                        scales: {
+                            xAxes: [{
+                                display: true,
+                                ticks: {
+                                min: 0,
+                                max: 1,
+                                // x축 index 색깔
+                                fontColor:'#171717',
+                                fontSize : 12
+                                },
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'x축'
+                                }
+                            }],
+                            yAxes: [{
+                                display: true,
+                                ticks: {
+                                min: 136,
+                                max: 139,   
+                                suggestedMin: 0,
+                                fontColor:'white',
+                                fontSize : 12
+                                },
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'Parameter값',
+                                    fontColor:'white',
+                                    fontSize : 12
+                                }
+                            }]
+                        }
+                    }
+                });
+                </script>
+                <script>
+                    new Chart(document.getElementById("canvas10"), {
+                        type: 'line',
+                        data: {
+                            // x축 라벨
+                            labels: ['1', '2'],
+                            datasets: [{
+                                label: '최대 최적값',
+                                data: [212.99,212.99,212.99,212.99,212.99],
+                                borderColor: "#4374D9",
+                                backgroundColor: "#4374D9",
+                                pointRadius : 0,
+                                fill: false,
+                                lineTension: 0}, 
+                                
+                                {
+                            label: '최소 최적값',
+                                fontColor:'white',
+                                fontSize : 12,
+                                data: [212.15,212.15,212.15,212.15,212.15],
+                                fill: false,         // 채우기 없음
+                                lineTension : 0,  // 0이면 꺾은선 그래프, 숫자가 높을수록 둥글해짐
+                                pointRadius : 0,    // 각 지점에 포인트 주지 않음
+                                borderColor: "#B2CCFF",
+                                backgroundColor: "#B2CCFF",
+                                lineTension: 0}
+                            ]
+                        },
+                
+                        options: {
+                            responsive: false,
+                            // 표 위에 라벨명 스타일
+                            legend: {
+                                labels: {
+                                    fontColor: "white",
+                                    fontSize: 12
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Etching_rate2',
+                                fontColor:'white',
+                                fontSize : 15
+                            },
+                            tooltips: {
+                                mode: 'index',
+                                intersect: false,
+                            },
+                            hover: {
+                                mode: 'nearest',
+                                intersect: true
+                            },
+                            scales: {
+                                xAxes: [{
+                                    display: true,
+                                    ticks: {
+                                    min: 0,
+                                    max: 1,
+                                    // x축 index 색깔
+                                    fontColor:'#171717',
+                                    fontSize : 12
+                                    },
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'x축'
+                                    }
+                                }],
+                                yAxes: [{
+                                    display: true,
+                                    ticks: {
+                                    min: 212.00,
+                                    max: 213.10,   
+                                    suggestedMin: 0,
+                                    fontColor:'white',
+                                    fontSize : 12
+                                    },
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'Parameter값',
+                                        fontColor:'white',
+                                        fontSize : 12
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                    </script>
+                    <script>
+                        new Chart(document.getElementById("canvas11"), {
+                            type: 'line',
+                            data: {
+                                // x축 라벨
+                                labels: ['1', '2'],
+                                datasets: [{
+                                    label: '최대 최적값',
+                                    data: [191.5,191.5,191.5,191.5,191.5],
+                                    borderColor: "#4374D9",
+                                    backgroundColor: "#4374D9",
+                                    pointRadius : 0,
+                                    fill: false,
+                                    lineTension: 0}, 
+                                    
+                                    {
+                                label: '최소 최적값',
+                                    fontColor:'white',
+                                    fontSize : 12,
+                                    data: [191.1,191.1,191.1,191.1,191.1],
+                                    fill: false,         // 채우기 없음
+                                    lineTension : 0,  // 0이면 꺾은선 그래프, 숫자가 높을수록 둥글해짐
+                                    pointRadius : 0,    // 각 지점에 포인트 주지 않음
+                                    borderColor: "#B2CCFF",
+                                    backgroundColor: "#B2CCFF",
+                                    lineTension: 0}
+                                ]
+                            },
+                    
+                            options: {
+                                responsive: false,
+                                // 표 위에 라벨명 스타일
+                                legend: {
+                                    labels: {
+                                        fontColor: "white",
+                                        fontSize: 12
+                                    }
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Etching_rate3',
+                                    fontColor:'white',
+                                    fontSize : 15
+                                },
+                                tooltips: {
+                                    mode: 'index',
+                                    intersect: false,
+                                },
+                                hover: {
+                                    mode: 'nearest',
+                                    intersect: true
+                                },
+                                scales: {
+                                    xAxes: [{
+                                        display: true,
+                                        ticks: {
+                                        min: 0,
+                                        max: 1,
+                                        // x축 index 색깔
+                                        fontColor:'#171717',
+                                        fontSize : 12
+                                        },
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'x축'
+                                        }
+                                    }],
+                                    yAxes: [{
+                                        display: true,
+                                        ticks: {
+                                        min: 190.7,
+                                        max: 191.8,   
+                                        suggestedMin: 0,
+                                        fontColor:'white',
+                                        fontSize : 12
+                                        },
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Parameter값',
+                                            fontColor:'white',
+                                            fontSize : 12
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                        </script>
+
+<!-- Ion Implataion 공정 -->
+                        <script>
+                            new Chart(document.getElementById("canvas12"), {
+                                type: 'line',
+                                data: {
+                                    // x축 라벨
+                                    labels: ['1', '2'],
+                                    datasets: [{
+                                        label: '최대 최적값',
+                                        data: [29606.2,29606.2,29606.2,29606.2,29606.2],
+                                        borderColor: "#4374D9",
+                                        backgroundColor: "#4374D9",
+                                        pointRadius : 0,
+                                        fill: false,
+                                        lineTension: 0}, 
+                                        
+                                        {
+                                    label: '최소 최적값',
+                                        fontColor:'white',
+                                        fontSize : 12,
+                                        data: [29605.7,29605.7,29605.7,29605.7,29605.7],
+                                        fill: false,         // 채우기 없음
+                                        lineTension : 0,  // 0이면 꺾은선 그래프, 숫자가 높을수록 둥글해짐
+                                        pointRadius : 0,    // 각 지점에 포인트 주지 않음
+                                        borderColor: "#B2CCFF",
+                                        backgroundColor: "#B2CCFF",
+                                        lineTension: 0}
+                                    ]
+                                },
+                        
+                                options: {
+                                    responsive: false,
+                                    // 표 위에 라벨명 스타일
+                                    legend: {
+                                        labels: {
+                                            fontColor: "white",
+                                            fontSize: 12
+                                        }
+                                    },
+                                    title: {
+                                        display: true,
+                                        text: 'Input_Energy',
+                                        fontColor:'white',
+                                        fontSize : 15
+                                    },
+                                    tooltips: {
+                                        mode: 'index',
+                                        intersect: false,
+                                    },
+                                    hover: {
+                                        mode: 'nearest',
+                                        intersect: true
+                                    },
+                                    scales: {
+                                        xAxes: [{
+                                            display: true,
+                                            ticks: {
+                                            min: 0,
+                                            max: 1,
+                                            // x축 index 색깔
+                                            fontColor:'#171717',
+                                            fontSize : 12
+                                            },
+                                            scaleLabel: {
+                                                display: true,
+                                                labelString: 'x축'
+                                            }
+                                        }],
+                                        yAxes: [{
+                                            display: true,
+                                            ticks: {
+                                            min: 29605.5,
+                                            max: 29606.5,   
+                                            suggestedMin: 0,
+                                            fontColor:'white',
+                                            fontSize : 12
+                                            },
+                                            scaleLabel: {
+                                                display: true,
+                                                labelString: 'Parameter값',
+                                                fontColor:'white',
+                                                fontSize : 12
+                                            }
+                                        }]
+                                    }
+                                }
+                            });
+                            </script>
+         <script>
+            new Chart(document.getElementById("canvas13"), {
+                type: 'line',
+                data: {
+                    // x축 라벨
+                    labels: ['1', '2'],
+                    datasets: [{
+                        label: '최대 최적값',
+                        data: [99.05,99.05,99.05,99.05,99.05],
+                        borderColor: "#4374D9",
+                        backgroundColor: "#4374D9",
+                        pointRadius : 0,
+                        fill: false,
+                        lineTension: 0}, 
+                        
+                        {
+                    label: '최소 최적값',
+                        fontColor:'white',
+                        fontSize : 12,
+                        data: [98.75,98.75,98.75,98.75,98.75],
+                        fill: false,         // 채우기 없음
+                        lineTension : 0,  // 0이면 꺾은선 그래프, 숫자가 높을수록 둥글해짐
+                        pointRadius : 0,    // 각 지점에 포인트 주지 않음
+                        borderColor: "#B2CCFF",
+                        backgroundColor: "#B2CCFF",
+                        lineTension: 0}
+                    ]
+                },
+        
+                options: {
+                    responsive: false,
+                    // 표 위에 라벨명 스타일
+                    legend: {
+                        labels: {
+                            fontColor: "white",
+                            fontSize: 12
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Temp_implantation',
+                        fontColor:'white',
+                        fontSize : 15
+                    },
+                    tooltips: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true
+                    },
+                    scales: {
+                        xAxes: [{
+                            display: true,
+                            ticks: {
+                            min: 0,
+                            max: 1,
+                            // x축 index 색깔
+                            fontColor:'#171717',
+                            fontSize : 12
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'x축'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            ticks: {
+                            min: 98.55,
+                            max: 99.25,   
+                            suggestedMin: 0,
+                            fontColor:'white',
+                            fontSize : 12
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Parameter값',
+                                fontColor:'white',
+                                fontSize : 12
+                            }
+                        }]
+                    }
+                }
+            });
+            </script>
+         <script>
+            new Chart(document.getElementById("canvas14"), {
+                type: 'line',
+                data: {
+                    // x축 라벨
+                    labels: ['1', '2'],
+                    datasets: [{
+                        label: '최대 최적값',
+                        data: [886,886,886,886,886],
+                        borderColor: "#4374D9",
+                        backgroundColor: "#4374D9",
+                        pointRadius : 0,
+                        fill: false,
+                        lineTension: 0}, 
+                        
+                        {
+                    label: '최소 최적값',
+                        fontColor:'white',
+                        fontSize : 12,
+                        data: [884,884,884,884,884],
+                        fill: false,         // 채우기 없음
+                        lineTension : 0,  // 0이면 꺾은선 그래프, 숫자가 높을수록 둥글해짐
+                        pointRadius : 0,    // 각 지점에 포인트 주지 않음
+                        borderColor: "#B2CCFF",
+                        backgroundColor: "#B2CCFF",
+                        lineTension: 0}
+                    ]
+                },
+        
+                options: {
+                    responsive: false,
+                    // 표 위에 라벨명 스타일
+                    legend: {
+                        labels: {
+                            fontColor: "white",
+                            fontSize: 12
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Furance_Temp',
+                        fontColor:'white',
+                        fontSize : 15
+                    },
+                    tooltips: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true
+                    },
+                    scales: {
+                        xAxes: [{
+                            display: true,
+                            ticks: {
+                            min: 0,
+                            max: 1,
+                            // x축 index 색깔
+                            fontColor:'#171717',
+                            fontSize : 12
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'x축'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            ticks: {
+                            min: 882,
+                            max: 888,   
+                            suggestedMin: 0,
+                            fontColor:'white',
+                            fontSize : 12
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Parameter값',
+                                fontColor:'white',
+                                fontSize : 12
+                            }
+                        }]
+                    }
+                }
+            });
+            </script>
+
+
                         </div>
+
                       </div>      
                 </div>     
             </div>
@@ -136,7 +1445,7 @@
 
     <!-- SCRIPTS
     ========================================-->
-    <script src="static/js/plagin-js/jquery-1.11.3.js"></script>
+    <!-- <script src="static/js/plagin-js/jquery-1.11.3.js"></script> -->
     <script src="static/js/plagin-js/preloader.js"></script>
     <script src="static/bootstrap/js/bootstrap.min.js"></script>
     <script src="static/js/plagin-js/plagin.js"></script>
